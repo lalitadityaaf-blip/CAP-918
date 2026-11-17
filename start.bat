@@ -7,25 +7,31 @@ echo             Starting PG Manager App
 echo ===================================================
 echo.
 
-rem Locate project directory
+rem Locate project directory containing package.json
 set "BASE_DIR=%~dp0"
 if exist "%BASE_DIR%package.json" (
     set "APP_DIR=%BASE_DIR%"
-    set "SCRIPTS_DIR=%BASE_DIR%scripts"
 ) else if exist "%BASE_DIR%pg-manager\package.json" (
-    set "APP_DIR=%BASE_DIR%pg-manager"
-    set "SCRIPTS_DIR=%BASE_DIR%scripts"
-) else if exist "%BASE_DIR%..\pg-manager\package.json" (
-    set "APP_DIR=%BASE_DIR%..\pg-manager"
-    set "SCRIPTS_DIR=%BASE_DIR%..\scripts"
+    set "APP_DIR=%BASE_DIR%pg-manager\"
+) else if exist "%BASE_DIR%CAP-918-main\package.json" (
+    set "APP_DIR=%BASE_DIR%CAP-918-main\"
+) else if exist "%BASE_DIR%Lalit-projj-main\package.json" (
+    set "APP_DIR=%BASE_DIR%Lalit-projj-main\"
 ) else if exist "%BASE_DIR%..\package.json" (
     set "APP_DIR=%BASE_DIR%..\"
-    set "SCRIPTS_DIR=%BASE_DIR%..\scripts"
+) else if exist "%BASE_DIR%..\pg-manager\package.json" (
+    set "APP_DIR=%BASE_DIR%..\pg-manager\"
+) else if exist "package.json" (
+    set "APP_DIR=%cd%\"
 ) else (
-    echo [ERROR] Could not find package.json!
+    echo [ERROR] Could not find project files (package.json)!
+    echo Please make sure you have extracted all files from the downloaded zip.
     pause
     exit /b 1
 )
+
+set "SCRIPTS_DIR=%APP_DIR%scripts"
+cd /d "%APP_DIR%"
 
 rem Check Node.js
 where node >nul 2>nul
@@ -35,8 +41,6 @@ if %errorlevel% neq 0 (
     pause
     exit /b 1
 )
-
-cd /d "%APP_DIR%"
 
 rem Check dependencies
 if not exist "node_modules\" (
