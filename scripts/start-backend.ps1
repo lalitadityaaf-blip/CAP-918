@@ -5,7 +5,14 @@
 #         .\stop-backend.cmd             stop, and switch the frontend back to demo mode
 param([switch]$Stop, [switch]$Reset)
 
-$app = Resolve-Path (Join-Path $PSScriptRoot '..\pg-manager')
+$projectRoot = Split-Path $PSScriptRoot -Parent
+if (Test-Path (Join-Path $projectRoot 'package.json')) {
+  $app = $projectRoot
+} elseif (Test-Path (Join-Path $projectRoot 'pg-manager\package.json')) {
+  $app = Resolve-Path (Join-Path $projectRoot 'pg-manager')
+} else {
+  $app = $projectRoot
+}
 Set-Location $app
 $Host.UI.RawUI.WindowTitle = 'PG Manager - Backend'
 
@@ -23,7 +30,7 @@ if (-not (Get-Command docker -ErrorAction SilentlyContinue)) {
   Write-Host 'Docker is not installed. The local backend runs in Docker.' -ForegroundColor Red
   Write-Host ' 1. Install Docker Desktop: https://www.docker.com/products/docker-desktop/'
   Write-Host ' 2. Start it, wait until it says "Engine running", then run start-backend again.'
-  Write-Host 'Alternative: use a free cloud project instead (see pg-manager\supabase\README.md).'
+  Write-Host 'Alternative: use a free cloud project instead (see supabase\README.md).'
   Write-Host 'The frontend still works in DEMO mode without a backend.' -ForegroundColor Yellow
   exit 1
 }

@@ -1,7 +1,14 @@
 # Starts the PG Manager frontend (Ionic/Angular dev server) at http://localhost:4200
 # Usage:  .\start-frontend.cmd           (or the VS Code task "Frontend")
 
-$app = Resolve-Path (Join-Path $PSScriptRoot '..\pg-manager')
+$projectRoot = Split-Path $PSScriptRoot -Parent
+if (Test-Path (Join-Path $projectRoot 'package.json')) {
+  $app = $projectRoot
+} elseif (Test-Path (Join-Path $projectRoot 'pg-manager\package.json')) {
+  $app = Resolve-Path (Join-Path $projectRoot 'pg-manager')
+} else {
+  $app = $projectRoot
+}
 Set-Location $app
 $Host.UI.RawUI.WindowTitle = 'PG Manager - Frontend'
 

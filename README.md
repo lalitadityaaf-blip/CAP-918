@@ -12,7 +12,7 @@ Docs: [architecture](../docs/architecture.md) · [syllabus mapping (CAP918)](../
 - **Node 24.15+** (or 22.22.3+). Angular 22 refuses older versions.
 - Android Studio for Android builds; a Mac with Xcode for iOS builds.
 
-## Start (from the project root `e:\Lalit_project`)
+## Start (from the project root)
 | What | Double-click / terminal | VS Code (Terminal → Run Task…) |
 |---|---|---|
 | Frontend + backend, in two windows | `start-all.cmd` | **Start all** |

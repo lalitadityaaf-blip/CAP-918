@@ -14,20 +14,20 @@
 #     node --version                         (must print v24.15+ or v22.22.3+)
 #
 # --- B. Install all npm packages (sections 2 and 3 below) ---
-#     cd e:\Lalit_project\pg-manager
+#     cd <project-folder>
 #     npm ci                                 (exact versions from package-lock.json)
 #
 # --- C. Local backend: Docker Desktop + Supabase images ---
 #     winget install -e --id Docker.DockerDesktop
 #     (start Docker Desktop and wait for "Engine running", then:)
-#     cd e:\Lalit_project
+#     cd <project-folder>
 #     start-backend.cmd                      (first run downloads Supabase CLI 3.1.0 + Docker images, ~5 min)
 #
 # --- D. Android builds: Android Studio (includes JDK 21 and the SDK Manager) ---
 #     winget install -e --id Google.AndroidStudio
 #     (open Android Studio once, finish the setup wizard, then in
 #      Settings > Languages & Frameworks > Android SDK tick "Android 16 (API 36)")
-#     cd e:\Lalit_project\pg-manager
+#     cd <project-folder>
 #     npm run build
 #     npx cap sync android
 #     cd android
@@ -41,7 +41,7 @@
 #     npx cap open ios                       (Xcode downloads the Swift packages on first open)
 #
 # --- F. End-to-end tests: Playwright browser ---
-#     cd e:\Lalit_project\pg-manager
+#     cd <project-folder>
 #     npx playwright install chromium
 
 # ===================================================================

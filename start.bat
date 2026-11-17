@@ -7,16 +7,22 @@ echo             Starting PG Manager App
 echo ===================================================
 echo.
 
-rem Locate pg-manager directory
+rem Locate project directory
 set "BASE_DIR=%~dp0"
-if exist "%BASE_DIR%pg-manager\package.json" (
+if exist "%BASE_DIR%package.json" (
+    set "APP_DIR=%BASE_DIR%"
+    set "SCRIPTS_DIR=%BASE_DIR%scripts"
+) else if exist "%BASE_DIR%pg-manager\package.json" (
     set "APP_DIR=%BASE_DIR%pg-manager"
     set "SCRIPTS_DIR=%BASE_DIR%scripts"
 ) else if exist "%BASE_DIR%..\pg-manager\package.json" (
     set "APP_DIR=%BASE_DIR%..\pg-manager"
     set "SCRIPTS_DIR=%BASE_DIR%..\scripts"
+) else if exist "%BASE_DIR%..\package.json" (
+    set "APP_DIR=%BASE_DIR%..\"
+    set "SCRIPTS_DIR=%BASE_DIR%..\scripts"
 ) else (
-    echo [ERROR] Could not find pg-manager folder!
+    echo [ERROR] Could not find package.json!
     pause
     exit /b 1
 )
