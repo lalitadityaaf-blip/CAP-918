@@ -20,6 +20,9 @@
     "test:backend": "node supabase/tests/backend.test.mjs"
   },
   "private": true,
+  "engines": {
+    "node": ">=22.22.3"
+  },
   "dependencies": {
     "@angular/common": "22.2.5",
     "@angular/compiler": "22.2.5",
