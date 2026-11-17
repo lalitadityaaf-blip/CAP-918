@@ -9,3 +9,4 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular';
 export class AppComponent {
   constructor() {}
 }
+
